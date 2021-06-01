@@ -1,7 +1,11 @@
 class Bank
 
-  def deposit
-    1000
+  def deposit(amount)
+    amount
+  end
+
+  def withdraw(amount)
+    amount
   end
 
 end
