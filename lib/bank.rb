@@ -3,6 +3,8 @@ require 'Date'
 
 class Bank
 
+  MIN_BALANCE = 0
+
   attr_reader :balance, :transaction
   
   def initialize
@@ -20,11 +22,19 @@ class Bank
   end
 
   def withdraw(amount)
+    raise "Insufficient Funds please withdraw a lesser amount" if insufficient_funds?(amount)
+
     @balance -= amount
     @transaction[:date] = @time.strftime("%d/%m/%Y")
     @transaction[:credit] = 0
     @transaction[:debit] = amount
     @transaction[:balance] = @balance
+  end
+
+  private
+  
+  def insufficient_funds?(amount)
+    @balance - amount < MIN_BALANCE
   end
 
 end

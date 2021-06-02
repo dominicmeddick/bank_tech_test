@@ -22,4 +22,8 @@ describe Bank do
     expect(subject.transaction).to eq({ date: Time.new.strftime("%d/%m/%Y"), credit: 0, debit: 500, balance: 500 })
   end
 
+  it 'prevents the user from withdrawing more money than is in the account' do
+    expect { subject.withdraw(500) }.to raise_error( "Insufficient Funds please withdraw a lesser amount" )
+  end
+
 end
