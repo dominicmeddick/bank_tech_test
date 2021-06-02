@@ -13,7 +13,13 @@ describe Bank do
 
   it 'can record the date of the desposit, update credit and balance' do
     subject.deposit(1000) 
-    expect(subject.transaction).to eq({ date: Time.new.strftime("%d/%m/%Y"), credit: 1000, debit: "||", balance: 1000 })
+    expect(subject.transaction).to eq({ date: Time.new.strftime("%d/%m/%Y"), credit: 1000, debit: 0, balance: 1000 })
+  end
+
+  it 'can record date of the withdrawel, updated debit and balance' do
+    subject.deposit(1000)
+    subject.withdraw(500)
+    expect(subject.transaction).to eq({ date: Time.new.strftime("%d/%m/%Y"), credit: 0, debit: 500, balance: 500 })
   end
 
 end
