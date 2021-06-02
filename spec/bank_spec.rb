@@ -11,4 +11,9 @@ describe Bank do
     expect(subject.withdraw(500)).to eq(500)
   end
 
+  it 'can record the date of the desposit, update credit and balance' do
+    subject.deposit(1000) 
+    expect(subject.transaction).to eq({ date: "02/06/2021", credit: 1000, debit: "||", balance: 1000 })
+  end
+
 end
