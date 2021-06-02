@@ -3,7 +3,7 @@ class Transaction
   attr_reader :record
 
   def initialize
-    @record = [:date, :credit, :debit, :balance]
+    @record = { date: nil, credit: nil, debit: nil, balance: nil}
   end
 
 end
