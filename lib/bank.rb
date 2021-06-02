@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 require_relative 'transaction'
+require_relative 'print'
+
 require 'Date'
 
 # First class
 class Bank
   MIN_BALANCE = 0
 
-  attr_reader :balance, :transaction
+  attr_reader :balance, :transaction, :print
 
   def initialize
     @balance = 0
