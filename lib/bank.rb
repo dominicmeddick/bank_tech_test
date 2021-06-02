@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require_relative 'transaction'
 require 'Date'
 
+# First class
 class Bank
-
   MIN_BALANCE = 0
 
   attr_reader :balance, :transaction
-  
+
   def initialize
     @balance = 0
     @transaction = Transaction.new.record
@@ -15,26 +17,25 @@ class Bank
 
   def deposit(amount)
     @balance += amount
-    @transaction[:date] = @time.strftime("%d/%m/%Y")
+    @transaction[:date] = @time.strftime('%d/%m/%Y')
     @transaction[:credit] = amount
     @transaction[:debit] = 0
     @transaction[:balance] = @balance
   end
 
   def withdraw(amount)
-    raise "Insufficient Funds please withdraw a lesser amount" if insufficient_funds?(amount)
+    raise 'Insufficient Funds please withdraw a lesser amount' if insufficient_funds?(amount)
 
     @balance -= amount
-    @transaction[:date] = @time.strftime("%d/%m/%Y")
+    @transaction[:date] = @time.strftime('%d/%m/%Y')
     @transaction[:credit] = 0
     @transaction[:debit] = amount
     @transaction[:balance] = @balance
   end
 
   private
-  
+
   def insufficient_funds?(amount)
     @balance - amount < MIN_BALANCE
   end
-
 end
