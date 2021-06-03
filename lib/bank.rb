@@ -30,19 +30,21 @@ class Bank
     withdraw_transaction(amount)
   end
 
+  private
+
   def print_statement
     transaction = @transaction
     @print.print_transactions(transaction)
   end
 
-  private
-
   def desposit_transaction(amount)
-    @transaction << { date: @time.strftime('%d/%m/%Y'), credit: "%.2f" % [amount], debit: 0.00, balance: "%.2f" % [@balance] }
+    @transaction << { date: @time.strftime('%d/%m/%Y'), credit: format('%.2f', amount), debit: 0.00,
+                      balance: format('%.2f', @balance) }
   end
 
   def withdraw_transaction(amount)
-    @transaction << { date: @time.strftime('%d/%m/%Y'), credit: 0.00, debit: "%.2f" % [amount], balance: "%.2f" % [@balance] }
+    @transaction << { date: @time.strftime('%d/%m/%Y'), credit: 0.00, debit: format('%.2f', amount),
+                      balance: format('%.2f', @balance) }
   end
 
   def insufficient_funds?(amount)
