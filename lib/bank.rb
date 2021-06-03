@@ -32,20 +32,12 @@ class Bank
   private
 
   def desposit_transaction(amount)
-    @transaction[:date] << @time.strftime('%d/%m/%Y')
-    @transaction[:credit] << amount
-    @transaction[:debit] << 0
-    @transaction[:balance] = @balance
+    @transaction << { date: @time.strftime('%d/%m/%Y'), credit: amount, debit: 0, balance: @balance }
   end
 
   def withdraw_transaction(amount)
-    @transaction[:date] << @time.strftime('%d/%m/%Y')
-    @transaction[:credit] << 0
-    @transaction[:debit] << amount
-    @transaction[:balance] = @balance
+    @transaction << { date: @time.strftime('%d/%m/%Y'), credit: 0, debit: amount, balance: @balance }
   end
-
-
 
   def insufficient_funds?(amount)
     @balance - amount < MIN_BALANCE

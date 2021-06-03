@@ -5,6 +5,6 @@ class Transaction
   attr_reader :record
 
   def initialize
-    @record = { date: [], credit: [], debit: [], balance: nil }
+    @record = []
   end
 end
