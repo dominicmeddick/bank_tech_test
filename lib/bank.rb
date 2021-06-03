@@ -19,23 +19,33 @@ class Bank
 
   def deposit(amount)
     @balance += amount
-    @transaction[:date] = @time.strftime('%d/%m/%Y')
-    @transaction[:credit] = amount
-    @transaction[:debit] = 0
-    @transaction[:balance] = @balance
+    desposit_transaction(amount)
   end
 
   def withdraw(amount)
     raise 'Insufficient Funds please withdraw a lesser amount' if insufficient_funds?(amount)
 
     @balance -= amount
-    @transaction[:date] = @time.strftime('%d/%m/%Y')
-    @transaction[:credit] = 0
-    @transaction[:debit] = amount
-    @transaction[:balance] = @balance
+    withdraw_transaction(amount)
   end
 
   private
+
+  def desposit_transaction(amount)
+    @transaction[:date] << @time.strftime('%d/%m/%Y')
+    @transaction[:credit] << amount
+    @transaction[:debit] << 0
+    @transaction[:balance] = @balance
+  end
+
+  def withdraw_transaction(amount)
+    @transaction[:date] << @time.strftime('%d/%m/%Y')
+    @transaction[:credit] << 0
+    @transaction[:debit] << amount
+    @transaction[:balance] = @balance
+  end
+
+
 
   def insufficient_funds?(amount)
     @balance - amount < MIN_BALANCE
