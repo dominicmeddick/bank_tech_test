@@ -7,12 +7,12 @@ require 'Date'
 
 # First class
 class Bank
-  MIN_BALANCE = 0
+  MIN_BALANCE = 0.00
 
   attr_reader :balance, :transaction, :print
 
   def initialize
-    @balance = 0
+    @balance = 0.00
     @transaction = Transaction.new.record
     @time = Time.new
     @print = Print.new
@@ -38,11 +38,11 @@ class Bank
   private
 
   def desposit_transaction(amount)
-    @transaction << { date: @time.strftime('%d/%m/%Y'), credit: amount, debit: 0, balance: @balance }
+    @transaction << { date: @time.strftime('%d/%m/%Y'), credit: "%.2f" % [amount], debit: 0.00, balance: "%.2f" % [@balance] }
   end
 
   def withdraw_transaction(amount)
-    @transaction << { date: @time.strftime('%d/%m/%Y'), credit: 0, debit: amount, balance: @balance }
+    @transaction << { date: @time.strftime('%d/%m/%Y'), credit: 0.00, debit: "%.2f" % [amount], balance: "%.2f" % [@balance] }
   end
 
   def insufficient_funds?(amount)
