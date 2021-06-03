@@ -15,6 +15,7 @@ class Bank
     @balance = 0
     @transaction = Transaction.new.record
     @time = Time.new
+    @print = Print.new
   end
 
   def deposit(amount)
@@ -27,6 +28,11 @@ class Bank
 
     @balance -= amount
     withdraw_transaction(amount)
+  end
+
+  def print_statement
+    transaction = @transaction
+    @print.print_transactions(transaction)
   end
 
   private
